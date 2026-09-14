@@ -3,70 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toko Online Simple</title>
+    <title>SerbaAda STORE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        body { background-color: #f4f4f4; padding: 20px; }
-        header { background: #25D366; color: white; text-align: center; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
-        
-        .container { display: flex; flex-wrap: wrap; gap: 20px; max-width: 1000px; margin: 0 auto; }
-        .products { flex: 2; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-        .product-card { background: white; padding: 15px; border-radius: 8px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .product-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
-        .product-card p { color: #555; font-weight: bold; margin-bottom: 12px; }
-        .btn-add { background: #007bff; color: white; border: none; padding: 8px 12px; cursor: pointer; border-radius: 4px; }
-        .btn-add:hover { background: #0056b3; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: #f8fafc; color: #0f172a; padding-bottom: 60px; }
 
-        .cart { flex: 1; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); height: fit-content; }
-        .cart h2 { margin-bottom: 15px; font-size: 1.2rem; border-bottom: 2px solid #ddd; padding-bottom: 5px; }
-        .cart-item { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem; }
-        .cart-total { font-weight: bold; margin-top: 15px; border-top: 2px solid #ddd; padding-top: 10px; display: flex; justify-content: space-between; }
-        .btn-checkout { background: #25D366; color: white; border: none; padding: 10px; width: 100%; margin-top: 15px; font-weight: bold; cursor: pointer; border-radius: 4px; font-size: 1rem; }
-        .btn-checkout:hover { background: #1ebd59; }
+        header { background: #0f172a; color: white; padding: 24px 20px; text-align: center; }
+        header h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; }
+        header p { color: #94a3b8; font-size: 0.875rem; margin-top: 4px; }
+
+        .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr; gap: 24px; }
+
+        @media (min-width: 768px) {
+            .container { grid-template-columns: 2fr 1fr; }
+        }
+
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+        .product-card { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s, box-shadow 0.2s; }
+        .product-card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+        .product-title { font-size: 1rem; font-weight: 600; color: #1e293b; margin-bottom: 6px; }
+        .product-price { font-size: 1.125rem; font-weight: 700; color: #2563eb; margin-bottom: 14px; }
+        
+        .btn-add { background: #f1f5f9; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .btn-add:hover { background: #2563eb; color: white; border-color: #2563eb; }
+
+        .cart-box { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; height: fit-content; }
+        .cart-title { font-size: 1.125rem; font-weight: 700; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; }
+        
+        .cart-items { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; max-height: 200px; overflow-y: auto; }
+        .cart-item { display: flex; justify-content: space-between; font-size: 0.875rem; color: #334155; }
+        
+        .input-group { margin-top: 12px; }
+        .input-group label { display: block; font-size: 0.75rem; font-weight: 600; color: #64748b; margin-bottom: 4px; text-transform: uppercase; }
+        .input-group input, .input-group textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.875rem; outline: none; }
+        .input-group input:focus, .input-group textarea:focus { border-color: #2563eb; }
+
+        .cart-total { display: flex; justify-content: space-between; font-weight: 700; font-size: 1rem; margin: 16px 0; padding-top: 12px; border-top: 1px solid #f1f5f9; }
+        
+        .btn-checkout { width: 100%; background: #16a34a; color: white; border: none; border-radius: 8px; padding: 12px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: background 0.2s; }
+        .btn-checkout:hover { background: #15803d; }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>SerbaAda_STORE</h1>
+        <h1>SerbaAda STORE</h1>
+        <p>Pesan Produk Pilihanmu Langsung via WhatsApp</p>
     </header>
 
     <div class="container">
-        <!-- Daftar Produk -->
-        <div class="products">
+        <!-- Grid Produk -->
+        <div class="product-grid">
             <div class="product-card">
-                <h3>Jus Mangga</h3>
-                <p>Rp 12.000</p>
-                <button class="btn-add" onclick="addToCart('Jus Mangga', 12000)">+ Keranjang</button>
+                <div>
+                    <div class="product-title">Jus Mangga</div>
+                    <div class="product-price">Rp 12.000</div>
+                </div>
+                <button class="btn-add" onclick="addToCart('Jus Mangga', 12000)">+ Tambah</button>
             </div>
             <div class="product-card">
-                <h3>Capung Bakar</h3>
-                <p>Rp 10.000</p>
-                <button class="btn-add" onclick="addToCart('Capung Bakar', 10000)">+ Keranjang</button>
+                <div>
+                    <div class="product-title">Capung Bakar</div>
+                    <div class="product-price">Rp 10.000</div>
+                </div>
+                <button class="btn-add" onclick="addToCart('Capung Bakar', 10000)">+ Tambah</button>
             </div>
             <div class="product-card">
-                <h3>Roti Bakar</h3>
-                <p>Rp 15.000</p>
-                <button class="btn-add" onclick="addToCart('Roti Bakar', 15000)">+ Keranjang</button>
+                <div>
+                    <div class="product-title">Roti Bakar</div>
+                    <div class="product-price">Rp 15.000</div>
+                </div>
+                <button class="btn-add" onclick="addToCart('Roti Bakar', 15000)">+ Tambah</button>
             </div>
         </div>
 
-        <!-- Ringkasan Keranjang -->
-        <div class="cart">
-            <h2>Keranjang Belanja</h2>
-            <div id="cart-list">
-                <p style="color: #888;">Keranjang masih kosong.</p>
+        <!-- Keranjang & Form -->
+        <div class="cart-box">
+            <div class="cart-title">
+                <span>Keranjang</span>
+                <span id="item-count" style="font-size: 0.8rem; background: #e2e8f0; padding: 2px 8px; border-radius: 12px;">0</span>
             </div>
+
+            <div id="cart-items" class="cart-items">
+                <p style="font-size: 0.875rem; color: #94a3b8;">Keranjang kosong.</p>
+            </div>
+
+            <div class="input-group">
+                <label for="nama">Nama Pembeli</label>
+                <input type="text" id="nama" placeholder="Masukkan nama kamu">
+            </div>
+
+            <div class="input-group">
+                <label for="alamat">Alamat Pengiriman</label>
+                <textarea id="alamat" rows="2" placeholder="Masukkan alamat lengkap"></textarea>
+            </div>
+
             <div class="cart-total">
                 <span>Total:</span>
-                <span id="cart-total">Rp 0</span>
+                <span id="cart-total" style="color: #2563eb;">Rp 0</span>
             </div>
-            <button class="btn-checkout" onclick="checkoutWA()">Pesan via WhatsApp</button>
+
+            <button class="btn-checkout" onclick="checkoutWA()">Checkout WhatsApp</button>
         </div>
     </div>
 
     <script>
-        // GANTI DENGAN NOMOR WHATSAPP KAMU (Gunakan kode negara '62' tanpa '+')
+        // Masukkan nomor WhatsApp kamu di sini (Gunakan format 62)
         const nomorWA = "6281934424277";
 
         let cart = [];
@@ -82,51 +125,65 @@
         }
 
         function renderCart() {
-            const cartList = document.getElementById('cart-list');
+            const cartItems = document.getElementById('cart-items');
             const cartTotal = document.getElementById('cart-total');
+            const itemCount = document.getElementById('item-count');
 
             if (cart.length === 0) {
-                cartList.innerHTML = '<p style="color: #888;">Keranjang masih kosong.</p>';
+                cartItems.innerHTML = '<p style="font-size: 0.875rem; color: #94a3b8;">Keranjang kosong.</p>';
                 cartTotal.innerText = 'Rp 0';
+                itemCount.innerText = '0';
                 return;
             }
 
-            cartList.innerHTML = '';
+            cartItems.innerHTML = '';
             let total = 0;
+            let totalQty = 0;
 
             cart.forEach(item => {
-                let itemTotal = item.price * item.qty;
-                total += itemTotal;
-                cartList.innerHTML += `
+                let subtotal = item.price * item.qty;
+                total += subtotal;
+                totalQty += item.qty;
+                cartItems.innerHTML += `
                     <div class="cart-item">
-                        <span>${item.name} x ${item.qty}</span>
-                        <span>Rp ${itemTotal.toLocaleString('id-ID')}</span>
+                        <span>${item.name} (${item.qty}x)</span>
+                        <strong>Rp ${subtotal.toLocaleString('id-ID')}</strong>
                     </div>
                 `;
             });
 
             cartTotal.innerText = `Rp ${total.toLocaleString('id-ID')}`;
+            itemCount.innerText = totalQty;
         }
 
         function checkoutWA() {
+            const nama = document.getElementById('nama').value.trim();
+            const alamat = document.getElementById('alamat').value.trim();
+
             if (cart.length === 0) {
-                alert("Keranjang kamu masih kosong!");
+                alert("Pilih minimal satu produk terlebih dahulu!");
                 return;
             }
 
-            let text = "Halo, saya mau pesan produk berikut:\n\n";
-            let total = 0;
+            if (!nama || !alamat) {
+                alert("Harap isi Nama dan Alamat pengiriman terlebih dahulu!");
+                return;
+            }
 
+            let text = `*PESANAN BARU - SerbaAda STORE*\n\n`;
+            text += `*Nama:* ${nama}\n`;
+            text += `*Alamat:* ${alamat}\n\n`;
+            text += `*Detail Pesanan:*\n`;
+
+            let total = 0;
             cart.forEach((item, index) => {
                 let subtotal = item.price * item.qty;
                 total += subtotal;
-                text += `${index + 1}. ${item.name} (${item.qty}x) - Rp ${subtotal.toLocaleString('id-ID')}\n`;
+                text += `${index + 1}. ${item.name} (${item.qty}x) = Rp ${subtotal.toLocaleString('id-ID')}\n`;
             });
 
             text += `\n*Total Bayar: Rp ${total.toLocaleString('id-ID')}*`;
-            text += "\n\nMohon diproses ya, terima kasih!";
 
-            // Mengarahkan ke API WhatsApp
             let url = `https://wa.me/${081934424277}?text=${encodeURIComponent(text)}`;
             window.open(url, '_blank');
         }
